@@ -13,8 +13,8 @@ import 'dart:typed_data';
 
 import 'package:blake2b/blake2b_hash.dart';
 import 'package:blake2b/utils.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:hex/hex.dart';
+import 'package:test/test.dart';
 
 void main() {
   bool _uint8ListEqual(Uint8List a, Uint8List b) {
