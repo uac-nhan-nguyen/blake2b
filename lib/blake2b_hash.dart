@@ -11,7 +11,7 @@
 ///
 import 'dart:typed_data';
 
-import 'package:blake2b/blake2b.dart';
+import 'blake2b.dart';
 import 'package:hex/hex.dart';
 
 class Blake2bHash {

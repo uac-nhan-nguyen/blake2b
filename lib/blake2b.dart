@@ -13,8 +13,8 @@ library blake2b;
 
 import 'dart:typed_data';
 
-import 'package:blake2b/byte_utils.dart';
-import 'package:blake2b/const.dart';
+import 'byte_utils.dart';
+import 'const.dart';
 import 'package:fixnum/fixnum.dart';
 
 /// Blake2b
@@ -35,13 +35,11 @@ class Blake2b {
   blake2bWithKey(final Uint8List key) {
     assert(key.length <= 64);
     this._buffer = Uint8List(Const.blockLengthBytes);
-    if (null != key) {
       this._key!.addAll(key);
       this._keyLength = key.length;
 
       this._buffer.addAll(key);
       this._bufferPos = Const.blockLengthBytes; // zero padding
-    }
     _digestSize = 64;
     init();
   }
@@ -51,23 +49,17 @@ class Blake2b {
     assert(1 <= digestSize && digestSize <= 64);
     this._digestSize = digestSize;
 
-    if (null != salt) {
-      assert(salt.length == 16);
-      this._salt!.addAll(salt);
-    }
+    assert(salt.length == 16);
+    this._salt!.addAll(salt);
 
-    if (null != personalization) {
-      assert(personalization.length == 16);
-      this._personalization!.addAll(personalization);
-    }
+    assert(personalization.length == 16);
+    this._personalization!.addAll(personalization);
 
-    if (null != key) {
-      this._key!.addAll(key);
-      this._keyLength = key.length;
+    this._key!.addAll(key);
+    this._keyLength = key.length;
 
-      this._buffer.addAll(key);
-      this._bufferPos = Const.blockLengthBytes; // zero padding
-    }
+    this._buffer.addAll(key);
+    this._bufferPos = Const.blockLengthBytes; // zero padding
 
     init();
   }
@@ -197,7 +189,7 @@ class Blake2b {
   }
 
   void update(Uint8List message, int offset, int len) {
-    if (null == message || 0 == len) {
+    if (0 == len) {
       return;
     }
 
